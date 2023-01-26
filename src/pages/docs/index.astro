@@ -1,0 +1,44 @@
+---
+import { SITE } from "src/config";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Hr from "@components/Hr.astro";
+const navItems = [
+  {
+    title: "Pathway to Vim Master",
+    description: "一起吃键盘hshshshshs.",
+    //		url: '/core/introduction',
+    //img: '/Core.jpg'
+  },
+  {
+    title: "This site",
+    description: "Still a place holder, coming soon!",
+    //url: '/components/buttons',
+    //img: '/Components.jpg'
+  },
+];
+---
+
+<Layout title={`Docs | ${SITE.title}`}>
+  <Header activeNav="docs" />
+  <Main pageTitle="Docs" pageDesc="Attemping writing down everything.">
+    <ul class="flex gap-4 max-w-5xl mx-auto text-left mt-12">
+      {
+        navItems.map(({ title, description }) => (
+          <box
+            {
+            /*href={url}*/ }
+            class="flex flex-col rounded-md hover:-translate-y-1 hover:shadow-lg transition-all flex-1 items-center p-4"
+          >
+            {/*<img src={img} alt={title}>*/}
+            <h2 class="text-lg font-medium text-center py-8">{title}</h2>
+            <boxh class="text-sm text-center py-2">{description}</boxh>
+          </box>
+        ))
+      }
+    </ul>
+  </Main>
+  <Footer />
+</Layout>
