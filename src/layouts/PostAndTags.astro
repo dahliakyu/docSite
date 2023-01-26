@@ -30,7 +30,10 @@ let tags = getUniqueTags(posts);
 
 <Layout title={`Posts | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="Not just rants!">
+  <Main
+    pageTitle="Posts"
+    pageDesc=" The description was 'Not just rants!' but now I feel like it's mainly just going to be rants"
+  >
     <ul>
       {
         slicedPosts.map(({ frontmatter }) => {
