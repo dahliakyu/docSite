@@ -18,8 +18,8 @@ export interface Props {
   totalPages: number;
   posts: MarkdownInstance<Frontmatter>[];
   slicedPosts: MarkdownInstance<Frontmatter>[];
+  noMarginTop?: boolean;
 }
-
 const { pageNum, totalPages, posts, slicedPosts } = Astro.props;
 
 const prev = pageNum > 1 ? "" : "disabled";

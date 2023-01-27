@@ -1,6 +1,4 @@
 ---
-import Breadcrumbs from "@components/Breadcrumbs.astro";
-
 export interface Props {
   pageTitle: string;
   pageDesc?: string;
@@ -9,19 +7,18 @@ export interface Props {
 const { pageTitle, pageDesc } = Astro.props;
 ---
 
-<Breadcrumbs />
-<main id="main-content">
+<submain id="main-content">
   <h1>{pageTitle}</h1>
   <p>{pageDesc}</p>
   <slot />
-</main>
+</submain>
 
 <style>
   #main-content {
     @apply max-w-3xl mx-auto px-4 pb-12 w-full;
   }
   #main-content h1 {
-    @apply font-semibold text-2xl py-2 sm:text-3xl;
+    @apply font-semibold text-2xl py-6 sm:text-3xl;
   }
   #main-content p {
     @apply mt-2 mb-6 italic;

@@ -18,7 +18,7 @@ const { docs } = Astro.props;
 <Layout title={`Docs | ${SITE.title}`}>
   <Header activeNav="docs" />
   <Main pageTitle="Docs" pageDesc="Attemping documenting everything.">
-    <ul class="flex gap-4 max-w-5xl mx-auto text-left mt-12">
+    <ul class="flex gap-4 max-w-5xl mx-auto text-center mt-12">
       {
         docs.map(({ frontmatter }) => {
           return (
