@@ -2,13 +2,13 @@
 author: el
 datetime: 2023-01-26T20:09:04.866Z
 title: essentials
-slug: essentialVim
-
-featured: false
-draft: false
+slug: buildingBlocks
 tags:
   - vim
+featured: false
+draft: false
 ogImage: ""
+description: Pathway to Vim Master 大家一起吃键盘shshshhs
 ---
 
 whttps://vimsheet.com/
