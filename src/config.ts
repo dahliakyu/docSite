@@ -16,6 +16,16 @@ export const LOGO_IMAGE = {
   width: 216,
   height: 46,
 };
+export type Sidebar = Record<string, { text: string; link: string }[]>;
+
+export const SIDEBAR: Sidebar = {
+  "Section Header": [
+    { text: "Introduction", link: "en/introduction" },
+    { text: "Page 2", link: "en/page-2" },
+    { text: "Page 3", link: "en/page-3" },
+  ],
+  "Another Section": [{ text: "Page 4", link: "en/page-4" }],
+};
 
 export const SOCIALS: SocialObjects = [
   {
