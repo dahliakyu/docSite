@@ -8,6 +8,7 @@ export interface Frontmatter {
   featured: boolean;
   draft: boolean;
   tags: string[];
+  mom: string;
 }
 
 export type SocialObjects = {
@@ -28,3 +29,7 @@ export type SocialMedia =
   | "Mail"
   | "Twitter"
   | "Mastodon";
+
+export type Sidebar = Record<string, { text: string; link: string }[]>;
+
+export type Doccard = { title: string; desc: string; link: string }[];

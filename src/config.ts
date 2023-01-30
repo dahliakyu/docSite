@@ -1,4 +1,4 @@
-import type { SocialObjects } from "./types";
+import type { SocialObjects, Doccard, Sidebar } from "./types";
 
 export const SITE = {
   website: "https://astro-paper.pages.dev/",
@@ -16,16 +16,35 @@ export const LOGO_IMAGE = {
   width: 216,
   height: 46,
 };
-export type Sidebar = Record<string, { text: string; link: string }[]>;
 
-export const SIDEBAR: Sidebar = {
-  "Section Header": [
-    { text: "Introduction", link: "en/introduction" },
-    { text: "Page 2", link: "en/page-2" },
-    { text: "Page 3", link: "en/page-3" },
-  ],
-  "Another Section": [{ text: "Page 4", link: "en/page-4" }],
+export const VIM_NAV: Sidebar = {
+  Introduction: [{ text: "Introduction", link: "docs/vim/building-blocks" }],
 };
+
+export const TSGAME_NAV: Sidebar = {
+  Introduction: [
+    {
+      text: "Introduction and basic Setup",
+      link: "docs/ts-game-engine/intro-and-basic-setup",
+    },
+    {
+      text: "Initializing WebGL",
+      link: "docs/ts-game-engine/initializing-webgl",
+    },
+  ],
+};
+export const DOCCARD: Doccard = [
+  {
+    title: "Pathway to Vim Mater",
+    desc: "hshshhshshs",
+    link: "docs/vim/building-blocks",
+  },
+  {
+    title: "Tyscript Game Engine",
+    desc: "WebGL good",
+    link: "docs/ts-game-engine/intro-and-basic-setup",
+  },
+];
 
 export const SOCIALS: SocialObjects = [
   {

@@ -2,9 +2,9 @@
 author: el
 datetime: 2023-01-26T20:09:04.866Z
 title: Pathway to Vim Master
+layout: ../../../layouts/DocDetails.astro
 slug: buildingBlocks
-tags:
-  - vim
+mom: vim
 featured: false
 draft: false
 ogImage: ""

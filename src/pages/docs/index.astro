@@ -1,7 +1,25 @@
 ---
-import Docs from "@layouts/Docs.astro";
-import type { Frontmatter } from "src/types";
-const docs = await Astro.glob<Frontmatter>("../../contents/Documentation/*.md");
+import { SITE } from "src/config";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Blocks from "@components/Blocks";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import { DOCCARD } from "src/config";
+const docCard = DOCCARD;
 ---
 
-<Docs docs={docs} />
+<Layout title={`Docs | ${SITE.title}`}>
+  <Header activeNav="docs" />
+  <Main pageTitle="Docs" pageDesc="Attemping documenting everything.">
+    <ul class="flex gap-4 max-w-5xl mx-auto text-center mt-12">
+      {
+        docCard.map(({ title, desc, link }) => {
+          const url = Astro.site?.pathname + link;
+          return <Blocks href={url} title={title} desc={desc} />;
+        })
+      }
+    </ul>
+  </Main>
+  <Footer />
+</Layout>

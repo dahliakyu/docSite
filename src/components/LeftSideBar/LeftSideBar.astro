@@ -1,21 +1,25 @@
 ---
-import { SIDEBAR } from "src/config";
+import { TSGAME_NAV, VIM_NAV } from "src/config";
+import getMomFromURL from "@utils/getMomFromURL";
 
 type Props = {
   currentPage: string;
 };
 
 const { currentPage } = Astro.props;
+
+let mom = getMomFromURL(currentPage);
 const currentPageMatch = currentPage.endsWith("/")
   ? currentPage.slice(1, -1)
   : currentPage.slice(1);
-const sidebar = SIDEBAR;
+
+const nav = mom === "vim" ? VIM_NAV : TSGAME_NAV;
 ---
 
-<nav aria-labelledby="grid-left">
+<nav>
   <ul class="nav-groups">
     {
-      Object.entries(sidebar).map(([header, children]) => (
+      Object.entries(nav).map(([header, children]) => (
         <li>
           <div class="nav-group">
             <h2>{header}</h2>
@@ -71,7 +75,7 @@ const sidebar = SIDEBAR;
   }
 
   .nav-groups > :first-child {
-    padding-top: var(--doc-padding);
+    padding-top: 2rem;
   }
 
   .nav-groups > :last-child {

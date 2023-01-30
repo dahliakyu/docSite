@@ -1,14 +1,13 @@
 ---
 author: el
-datetime: 2022-12-26T12:17:22.866Z
-title: Typescript Game Engine
-slug: ts-game-engine
-tags:
-  - typescript
+datetime: 2022-12-26T12∶17∶22
+layout: ../../../layouts/DocDetails.astro
+title: Introduction and basic setup
+slug: Intro and basic setup
+mom: TS Game Engine
 featured: false
 draft: false
 ogImage: ""
-description: webgl good
 ---
 
 ## Project Setup

@@ -36,10 +36,13 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
     <Datetime datetime={datetime} size="lg" className="my-2" />
-    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose">
+    <article
+      id="article"
+      role="article"
+      class="mx-auto text-xl max-w-3xl mt-8 prose"
+    >
       <Content />
     </article>
-
     <ul class="tags-container">
       {tags.map(tag => <Tag name={tag} />)}
     </ul>
@@ -52,7 +55,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
     @apply max-w-3xl mx-auto px-4 pb-12 w-full;
   }
   .post-title {
-    @apply font-semibold text-2xl text-skin-accent;
+    @apply font-semibold text-4xl py-2 text-skin-accent;
   }
   .tags-container {
     @apply my-8;

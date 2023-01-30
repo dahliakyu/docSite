@@ -3,7 +3,8 @@ import type { Frontmatter } from "src/types";
 
 export interface Props {
   href?: string;
-  post: Frontmatter;
+  title: string;
+  desc: string;
   secHeading?: boolean;
 }
 
@@ -16,11 +17,11 @@ const styles = {
   titleDesc: "text-sm text-skin-card font-medium p-4",
 };
 
-export default function Card({ href, post }: Props) {
+export default function Card({ href, title, desc }: Props) {
   return (
     <a href={href} className={styles.titleLink}>
-      <h1 className={styles.titleHeading}>{post.title}</h1>
-      <h2 className={styles.titleDesc}>{post.description}</h2>
+      <h1 className={styles.titleHeading}>{title}</h1>
+      <h2 className={styles.titleDesc}>{desc}</h2>
     </a>
   );
 }
