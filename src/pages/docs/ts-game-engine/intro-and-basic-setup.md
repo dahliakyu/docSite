@@ -27,6 +27,8 @@ ogImage: ""
 
 ## Basic Game loop
 
+### yes
+
 - tell the browser that we want a loop to continously run;
 - +the function to be looped, needs to be event based loop
 - declare the type of a variable or a method with ": + type"

@@ -36,7 +36,7 @@ export const TSGAME_NAV: Sidebar = {
 export const DOCCARD: Doccard = [
   {
     title: "Pathway to Vim Mater",
-    desc: "hshshhshshs",
+    desc: "一起吃键盘hshshhshshs",
     link: "docs/vim/building-blocks",
   },
   {

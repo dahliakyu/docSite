@@ -2,16 +2,19 @@
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import LeftSideBar from "@components//LeftSideBar/LeftSideBar.astro";
+import LeftSideBar from "@components/LeftSideBar/LeftSideBar.astro";
+import RightSideBar from "@components/RightSideBar.astro";
+import type { MarkdownHeading } from "astro";
 export interface Props {
   frontmatter: {
     title: string;
     description?: string;
   };
+  headings: MarkdownHeading[];
 }
+const headings = Astro.props.headings;
 
-const { frontmatter } = Astro.props;
-const { title, description } = frontmatter;
+const { title, description } = Astro.props.frontmatter;
 
 const currentPage = Astro.url.pathname;
 ---
@@ -28,76 +31,80 @@ const currentPage = Astro.url.pathname;
         <slot />
       </article>
     </div>
+    <aside id="grid-right" class="grid-sidebar" title="Table of Contents">
+      <RightSideBar headings={headings} />
+    </aside>
   </main>
+
   <Footer />
-</Layout>
+  <style>
+    .post-title {
+      @apply font-semibold text-4xl py-8 text-skin-accent;
+    }
+    body {
+      width: 100%;
+      display: grid;
+    }
 
-<style>
-  .post-title {
-    @apply font-semibold text-4xl py-8 text-skin-accent;
-  }
-  body {
-    width: 100%;
-    display: grid;
-  }
+    .main-display {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-columns: 1.2fr 3fr 1fr;
+    }
 
-  .main-display {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: 1fr 3fr;
-  }
-
-  .grid-sidebar {
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    padding: 0;
-  }
-
-  #grid-left {
-    position: fixed;
-    grid-column: 1;
-    background-color: var(--theme-bg);
-    z-index: 10;
-    display: none;
-  }
-
-  #grid-main {
-    padding: 0;
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    height: 100%;
-  }
-
-  @media (min-width: 50em) {
-    .layout {
-      overflow: initial;
-      grid-template-columns: 20rem minmax(0, var(--max-width));
-      gap: 1em;
+    .grid-sidebar {
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      padding: 0;
     }
 
     #grid-left {
-      display: flex;
-      padding-left: 2rem;
-      position: sticky;
-      grid-column: 1;
+      position: fixed;
+      background-color: var(--theme-bg);
+      z-index: 10;
+      display: none;
     }
-  }
 
-  @media (min-width: 72em) {
-    .layout {
-      grid-template-columns: 20rem minmax(0, var(calc(100% - 1rem))) 18rem;
-      padding-left: 0;
-      padding-right: 0;
-      margin: 0 auto;
+    #grid-main {
+      padding: var(--doc-padding) var(--gutter);
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     #grid-right {
-      grid-column: 3;
-      display: flex;
+      display: none;
     }
-  }
-</style>
+    @media (min-width: 50em) {
+      .layout {
+        overflow: initial;
+        grid-template-columns: 20rem minmax(0, var(--max-width));
+        gap: 1em;
+      }
+
+      #grid-left {
+        display: flex;
+        padding-left: 2rem;
+        position: sticky;
+        grid-column: 1;
+      }
+    }
+
+    @media (min-width: 72em) {
+      .layout {
+        grid-template-columns: 20rem minmax(0, var(calc(100% - 1rem))) 18rem;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0 auto;
+      }
+
+      #grid-right {
+        grid-column: 3;
+        display: flex;
+      }
+    }
+  </style>
+</Layout>
