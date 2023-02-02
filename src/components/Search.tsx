@@ -1,14 +1,12 @@
 import Fuse from "fuse.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "preact/hooks";
 import Card from "@components/Card";
 import slugify from "@utils/slugify";
-import type { Frontmatter } from "src/types";
+import type { BlogFrontmatter } from "@content/_schemas";
 
-type SearchItem = {
+export type SearchItem = {
   title: string;
-  description: string;
-  headings: string[];
-  frontmatter: Frontmatter;
+  data: BlogFrontmatter;
 };
 
 interface Props {
@@ -32,7 +30,7 @@ export default function SearchBar({ searchList }: Props) {
   };
 
   const fuse = new Fuse(searchList, {
-    keys: ["title", "description", "headings"],
+    keys: ["title", "data"],
     includeMatches: true,
     minMatchCharLength: 2,
     threshold: 0.5,
@@ -79,15 +77,15 @@ export default function SearchBar({ searchList }: Props) {
           </svg>
         </span>
         <input
-          className="placeholder:italic placeholder:text-opacity-75 py-3 pl-10 pr-3 
-        block bg-skin-fill w-full rounded
-        border border-skin-fill border-opacity-40 
-        focus:outline-none focus:border-skin-accent"
+          className="block w-full rounded border border-skin-fill 
+        border-opacity-40 bg-skin-fill py-3 pl-10
+        pr-3 placeholder:italic placeholder:text-opacity-75 
+        focus:border-skin-accent focus:outline-none"
           placeholder="Search for anything..."
           type="text"
           name="search"
-          defaultValue={inputVal}
-          onChange={handleChange}
+          value={inputVal}
+          onInput={handleChange}
           autoComplete="off"
           autoFocus
           ref={inputRef}
@@ -108,9 +106,9 @@ export default function SearchBar({ searchList }: Props) {
         {searchResults &&
           searchResults.map(({ item, refIndex }) => (
             <Card
-              post={item.frontmatter}
-              href={`/posts/${slugify(item.frontmatter)}`}
-              key={`${refIndex}-${slugify(item.frontmatter)}`}
+              href={`/posts/${slugify(item.data)}`}
+              frontmatter={item.data}
+              key={`${refIndex}-${slugify(item.data)}`}
             />
           ))}
       </ul>

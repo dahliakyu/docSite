@@ -4,26 +4,22 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
-import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "src/types";
-
+import type { CollectionEntry } from "astro:content";
 export interface Props {
-  post: MarkdownInstance<Frontmatter>;
+  post: CollectionEntry<"logs">;
 }
-
-const { frontmatter, Content } = Astro.props.post;
-
-const { title, author, description, ogImage, datetime, tags } = frontmatter;
-
+const { post } = Astro.props;
+const { title, author, ogImage, pubDatetime, tags } = post.data;
+const { Content } = await post.render();
 const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   .href;
 ---
 
-<Layout title={title} author={author} description={description} ogImage={ogUrl}>
+<Layout title={title} author={author} ogImage={ogUrl}>
   <Header />
-  <div class="max-w-3xl mx-auto w-full px-2 flex justify-start">
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
-      class="mt-8 mb-2 hover:opacity-75 flex focus-outline"
+      class="focus-outline mt-8 mb-2 flex hover:opacity-75"
       onclick="history.back()"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
@@ -35,14 +31,11 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   </div>
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
-    <Datetime datetime={datetime} size="lg" className="my-2" />
-    <article
-      id="article"
-      role="article"
-      class="mx-auto text-xl max-w-3xl mt-8 prose"
-    >
+    <Datetime datetime={pubDatetime} size="lg" className="my-2" />
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Content />
     </article>
+
     <ul class="tags-container">
       {tags.map(tag => <Tag name={tag} />)}
     </ul>
@@ -52,10 +45,10 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
 
 <style>
   main {
-    @apply max-w-3xl mx-auto px-4 pb-12 w-full;
+    @apply mx-auto w-full max-w-3xl px-4 pb-12;
   }
   .post-title {
-    @apply font-semibold text-4xl py-2 text-skin-accent;
+    @apply text-2xl font-semibold text-skin-accent;
   }
   .tags-container {
     @apply my-8;

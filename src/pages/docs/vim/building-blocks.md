@@ -169,7 +169,7 @@ To confirm each substitution, use the c flag:
 :s/foo/bar/gc
 ```
 
-```Output
+```bash
 replace with bar (y/n/a/q/l/^E/^Y)?
 ```
 

@@ -1,72 +1,36 @@
 ---
-import { SITE } from "src/config";
+import { CollectionEntry, getCollection } from "astro:content";
 import Posts from "@layouts/PostAndTags.astro";
 import PostDetails from "@layouts/PostDetails.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
-import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "src/types";
 import slugify from "@utils/slugify";
+import { SITE } from "@config";
 export interface Props {
-  post: MarkdownInstance<Frontmatter>;
-  tag: string;
+  post: CollectionEntry<"logs">;
 }
-
-type PostResult = {
-  params: {
-    slug: string | number;
-  };
-  props?: {
-    post: MarkdownInstance<Record<string, any>>;
-  };
-}[];
-
-type PagePaths = {
-  params: {
-    slug: string;
-  };
-}[];
-
 export async function getStaticPaths() {
-  const posts = await Astro.glob<Frontmatter>("../../contents/logs/**/*.md");
-
-  const filteredPosts = posts.filter(({ frontmatter }) => !frontmatter.draft);
-
-  let postResult: PostResult = filteredPosts.map(post => {
-    return {
-      params: {
-        slug: slugify(post.frontmatter),
-      },
-      props: {
-        post,
-      },
-    };
-  });
-
-  const pagePaths: PagePaths = getPageNumbers(filteredPosts.length).map(
-    pageNum => ({
-      params: { slug: String(pageNum) },
-    })
-  );
-
+  const posts = await getCollection("logs", ({ data }) => !data.draft);
+  const postResult = posts.map(post => ({
+    params: { slug: slugify(post.data) },
+    props: { post },
+  }));
+  const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
+    params: { slug: String(pageNum) },
+  }));
   return [...postResult, ...pagePaths];
 }
-
 const { slug } = Astro.params;
 const { post } = Astro.props;
-const posts = await Astro.glob<Frontmatter>("../../contents/logs/**/*.md");
-
+const posts = await getCollection("logs");
 const sortedPosts = getSortedPosts(posts);
-
 const totalPages = getPageNumbers(sortedPosts.length);
-
 const currentPage =
   slug && !isNaN(Number(slug)) && totalPages.includes(Number(slug))
     ? Number(slug)
     : 0;
 const lastPost = currentPage * SITE.postPerPage;
 const startPost = lastPost - SITE.postPerPage;
-
 const paginatedPosts = sortedPosts.slice(startPost, lastPost);
 ---
 
@@ -75,8 +39,7 @@ const paginatedPosts = sortedPosts.slice(startPost, lastPost);
     <PostDetails post={post} />
   ) : (
     <Posts
-      posts={posts}
-      slicedPosts={paginatedPosts}
+      posts={paginatedPosts}
       pageNum={currentPage}
       totalPages={totalPages.length}
     />

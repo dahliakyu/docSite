@@ -3,8 +3,8 @@ export interface Frontmatter {
   ogImage: string;
   description: string;
   author: string;
-  datetime: string;
-  slug: string;
+  pubDatetime: string;
+  blogSlug: string;
   featured: boolean;
   draft: boolean;
   tags: string[];

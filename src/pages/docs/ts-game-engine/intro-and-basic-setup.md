@@ -67,16 +67,16 @@ window.onload = function () {
 };
 ```
 
-```HTML
+```html
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>TypeScript Tutorial</title>
     <script type="text/javascript" src="main.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     Heloooooo
-</body>
+  </body>
 </html>
 ```

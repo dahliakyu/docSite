@@ -19,7 +19,7 @@ export default defineConfig({
     }),
     react(),
     sitemap(),
-    preact(),
+    preact({ compat: true }),
   ],
   markdown: {
     remarkPlugins: [

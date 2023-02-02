@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 
-function withOpacity(variableName) {
-  return ({ opacityValue }) => {
-    if (opacityValue !== undefined) {
-      return `rgba(var(${variableName}), ${opacityValue})`;
-    }
-    return `rgb(var(${variableName}))`;
+function injectHex(variableName) {
+
+    return `var(${variableName})` ;
+
   };
-}
+
 
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -24,42 +22,49 @@ module.exports = {
   extend: {
     textColor: {
       skin: {
-        base: withOpacity("--color-text-base"),
-        accent: withOpacity("--color-accent"),
-        inverted: withOpacity("--color-fill"),
-        card: withOpacity("--color-text-card"),
+        base: injectHex("--color-text-base"),
+        accent: injectHex("--color-accent"),
+        "sub-accent": injectHex("--color-sub-accent"),
+        inverted: injectHex("--color-fill"),
+        card: injectHex("--color-text-card"),
+        "md-heading":injectHex("--color-md-heading"),
       },
     },
     backgroundColor: {
       skin: {
-        fill: withOpacity("--color-fill"),
-        accent: withOpacity("--color-accent"),
-        inverted: withOpacity("--color-text-base"),
-        card: withOpacity("--color-card"),
-        "card-muted": withOpacity("--color-card-muted"),
+        fill: injectHex("--color-fill"),
+        accent: injectHex("--color-accent"),
+        inverted: injectHex("--color-text-base"),
+        card: injectHex("--color-card"),
+        "card-muted": injectHex("--color-card-muted"),
       },
+    },
+    backgroundImage:{
+      "gradient-blue-ltr": injectHex("--blog-heading-gradient-stops-ltr"),
+      "gradient-blue-rtl": injectHex("--blog-heading-gradient-stops-rtl"),
+      "gradient-bold-font":injectHex("--blog-bold-gradient"),
     },
     outlineColor: {
       skin: {
-        fill: withOpacity("--color-accent"),
+        fill: injectHex("--color-accent"),
       },
     },
     borderColor: {
       skin: {
-        line: withOpacity("--color-border"),
-        fill: withOpacity("--color-text-base"),
-        accent: withOpacity("--color-accent"),
+        line: injectHex("--color-border"),
+        fill: injectHex("--color-text-base"),
+        accent: injectHex("--color-accent"),
       },
     },
     fill: {
       skin: {
-        base: withOpacity("--color-text-base"),
-        accent: withOpacity("--color-accent"),
+        base: injectHex("--color-text-base"),
+        accent: injectHex("--color-accent"),
       },
       transparent: "transparent",
     },
     fontFamily: {
-      sans: ["'Exo 2'"],
+      sans: ["'Exo 2'", "sans-serif"],
       mono: ["IBM Plex Mono", "monospace"],
     },
     },
